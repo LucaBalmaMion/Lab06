@@ -13,7 +13,6 @@ class DepositoStrumenti:
     def __init__(self, nome, responsabile):
         self._nome = nome
         self._responsabile = responsabile
-        self.lista_strumenti = []
 
     @property
     def nome(self):
@@ -41,9 +40,10 @@ class DepositoStrumenti:
         cursore = cnx.cursor(dictionary=True)
         query = "select * from strumento"
         cursore.execute(query)
+        lista_strumenti = []
         for riga in cursore:
-            self.lista_strumenti.append(Strumento(riga["codice"], riga['tipo'], riga['marca'], riga['anno_acquisto'], riga['valore'], riga['disponibile']))
-        return self.lista_strumenti
+            lista_strumenti.append(Strumento(riga["codice"], riga['tipo'], riga['marca'], riga['anno_acquisto'], riga['valore'], riga['disponibile']))
+        return lista_strumenti
 
     def cerca_strumenti_per_tipo(self, tipo) -> list[Strumento] | None:
         """
@@ -52,8 +52,9 @@ class DepositoStrumenti:
             :return: una lista con tutti gli strumenti del tipo indicato oppure None
         """
         # TODO
+        lista_strumenti = self.get_strumenti()
         lista_strumenti_tipo = []
-        for elemento in self.lista_strumenti:
+        for elemento in lista_strumenti:
             if elemento.tipo == tipo:
                 lista_strumenti_tipo.append(elemento)
         if len(lista_strumenti_tipo) == 0:

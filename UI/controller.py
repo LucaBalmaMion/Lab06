@@ -28,8 +28,16 @@ class Controller:
         self._view.update()
 
     # Altre Funzioni Event Handler
-    def aggiorna_listview_strumenti(self):
+    def aggiorna_listview_strumenti(self)   :
         listaS = self._model.get_strumenti()
+        self._view.listview_strumenti.controls.clear()
         for el in listaS:
-            self._view.lista_strumenti.controls.append(el)
+            self._view.listview_strumenti.controls.append(ft.Text(f"{el}"))
+        self._view.page.update()
+
+    def aggiorna_listview_strumenti_tipo(self):
+        listaST = self._model.cerca_strumenti_per_tipo(self._view.input_tipo_strumento.value)
+        self._view.lista_strumenti_ricerca.controls.clear()
+        for el in listaST:
+            self._view.lista_strumenti_ricerca.controls.append(ft.Text(f"{el}"))
         self._view.page.update()

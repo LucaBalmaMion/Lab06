@@ -49,9 +49,6 @@ class View:
         # TextField per responsabile
         self.input_responsabile = ft.TextField(value=self.controller.get_responsabile(), label="Responsabile")
 
-        # ListView per mostrare la lista di strumenti aggiornata
-        self.lista_strumenti = ft.ListView(expand=True, spacing=5, padding=10, auto_scroll=True)
-
         # TextField per ricerca strumento per tipo
         self.input_tipo_strumento = ft.TextField(label="Tipo")
 
@@ -62,10 +59,12 @@ class View:
         self.toggle_cambia_tema = ft.Switch(label="Tema scuro", value=True, on_change=self.cambia_tema)
         pulsante_conferma_responsabile = ft.Button("Conferma", on_click=self.controller.conferma_responsabile)
 
+
         # Altri Pulsanti da implementare (es. "Mostra" e "Cerca")
         # TODO
         self.listview_strumenti = ft.ListView(expand=True, spacing=5, padding=10, auto_scroll=True)
         self.BtnMostra = ft.Button("Mostra", on_click=self.controller.aggiorna_listview_strumenti)
+        self.BtnConferma = ft.Button("Conferma", on_click=self.controller.aggiorna_listview_strumenti_tipo)
 
         # --- LAYOUT ---
         self.page.add(
@@ -87,11 +86,16 @@ class View:
             # TODO
             ft.Row(spacing = 20,
                    controls = [ft.Text("Strumenti", size=20),  self.BtnMostra]),
-            self.listview_strumenti
+            self.listview_strumenti,
 
 
             # Sezione 4
             # TODO
+            ft.Divider(),
+            ft.Text("Cerca strumenti per tipo", size=20),
+            ft.Row(spacing=20,
+                   controls = [self.input_tipo_strumento, self.BtnConferma]),
+            self.lista_strumenti_ricerca,
         )
 
     def cambia_tema(self, e):
