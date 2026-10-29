@@ -28,4 +28,8 @@ class Controller:
         self._view.update()
 
     # Altre Funzioni Event Handler
-    # TODO
+    def aggiorna_listview_strumenti(self):
+        listaS = self._model.get_strumenti()
+        for el in listaS:
+            self._view.lista_strumenti.controls.append(el)
+        self._view.page.update()

@@ -64,6 +64,8 @@ class View:
 
         # Altri Pulsanti da implementare (es. "Mostra" e "Cerca")
         # TODO
+        self.listview_strumenti = ft.ListView(expand=True, spacing=5, padding=10, auto_scroll=True)
+        self.BtnMostra = ft.Button("Mostra", on_click=self.controller.aggiorna_listview_strumenti)
 
         # --- LAYOUT ---
         self.page.add(
@@ -83,6 +85,10 @@ class View:
 
             # Sezione 3
             # TODO
+            ft.Row(spacing = 20,
+                   controls = [ft.Text("Strumenti", size=20),  self.BtnMostra]),
+            self.listview_strumenti
+
 
             # Sezione 4
             # TODO
